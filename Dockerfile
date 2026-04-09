@@ -27,4 +27,5 @@ EXPOSE 8000
 ENV PYTHONUNBUFFERED=1
 
 # Use Gunicorn with Uvicorn worker for production stability
-CMD ["gunicorn", "main:app", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000"]
+# Note: $PORT is provided by Railway/Render
+CMD gunicorn main:app --bind 0.0.0.0:${PORT:-8000} -w 4 -k uvicorn.workers.UvicornWorker
