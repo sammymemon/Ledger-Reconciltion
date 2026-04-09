@@ -14,9 +14,8 @@ WORKDIR /app
 COPY backend/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend code
+# Copy backend code (includes the data/ folder with .gitkeep)
 COPY backend/ ./
-RUN mkdir -p data
 
 # Copy built frontend from Stage 1 into backend/static
 COPY --from=frontend-builder /app/frontend/dist ./static
