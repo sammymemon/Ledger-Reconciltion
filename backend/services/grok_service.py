@@ -12,8 +12,12 @@ from openai import OpenAI
 from models.schemas import LedgerEntry, EntryType
 
 
-# Persistent API key storage path (.env)
-ENV_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")
+# Persistent settings storage path (in /data/ for volume survival)
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+if not os.path.exists(DATA_DIR):
+    os.makedirs(DATA_DIR, exist_ok=True)
+ENV_FILE = os.path.join(DATA_DIR, ".env")
 
 # Model configurations
 DEFAULT_MODEL = "grok-2-latest" 
