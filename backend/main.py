@@ -17,7 +17,13 @@ import database.models as models
 load_dotenv()
 
 # Initialize Database
-models.Base.metadata.create_all(bind=engine)
+try:
+    print("Connecting to database...")
+    models.Base.metadata.create_all(bind=engine)
+    print("Database initialized successfully.")
+except Exception as e:
+    print(f"CRITICAL: Database initialization failed: {e}")
+    # We continue so the app starts and we can see logs
 
 app = FastAPI(
     title="Ledger Reconciliation AI",
