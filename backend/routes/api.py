@@ -11,7 +11,7 @@ from models.schemas import UploadResponse, ReconciliationReport, SettingsRequest
 from services.reconciliation import (
     create_session, get_session, run_reconciliation, update_session_step
 )
-from services.grok_service import set_api_key, get_api_key, test_connection
+from services.grok_service import set_settings, get_api_key, test_connection
 from database.db import get_db
 from services.database_service import get_session_history, load_reconciliation_from_db
 
@@ -171,7 +171,7 @@ async def save_settings(settings: SettingsRequest):
         if len(settings.api_key) < 10:
              raise HTTPException(status_code=400, detail="Invalid API key")
         
-    grok_service.set_settings(key=settings.api_key, model=settings.model)
+    set_settings(key=settings.api_key, model=settings.model)
 
     return {"message": "Settings saved successfully"}
 

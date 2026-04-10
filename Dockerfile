@@ -32,4 +32,4 @@ ENV PORT=8000
 
 # Use Gunicorn with Uvicorn worker
 # We use a shell command to ensure $PORT is expanded correctly
-CMD gunicorn main:app --bind 0.0.0.0:$PORT -w 2 -k uvicorn.workers.UvicornWorker --timeout 120
+CMD gunicorn main:app --bind 0.0.0.0:$PORT -w 2 -k uvicorn.workers.UvicornWorker --timeout 120 --access-logfile - --error-logfile -
